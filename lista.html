@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Propiedades Exclusivas en Venta | roberto marte mateo</title>
+<meta name="description" content="Explora nuestro catálogo de propiedades exclusivas de lujo. roberto marte mateo - broker"/>
+<meta name="keywords" content="propiedades venta, apartamentos lujo, villas, bienes raices, roberto marte mateo"/>
+<link rel="canonical" href="https://robertomarte.com/lista.html" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://robertomarte.com/lista.html"/>
+<meta property="og:title" content="Propiedades Exclusivas en Venta | roberto marte mateo"/>
+<meta property="og:description" content="Catálogo completo de propiedades de lujo"/>
+<meta property="og:image" content="https://blogs.portafolio.co/desde-la-red/7-aspectos-valorar-elegir-buen-broker/"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Propiedades Exclusivas en Venta"/>
+<meta name="twitter:description" content="Catálogo completo de propiedades de lujo"/>
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='#1e3a8a'/><text x='50' y='50' text-anchor='middle' dy='0.35em' font-family='Playfair Display, serif' font-size='60' font-weight='bold' fill='white'>R</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        primary: "#1e3a8a",
+        secondary: "#3b82f6",
+        "background-light": "#f9fafb",
+        "background-dark": "#3b82f6",
+        "surface-light": "#FFFFFF",
+        "surface-dark": "#1f2937",
+      },
+      fontFamily: {
+        display: ["Playfair Display", "serif"],
+        sans: ["Montserrat", "sans-serif"],
+      }
+    }
+  }
+};
+</script>
+<style>
+html { scroll-behavior: smooth; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 43, 77, 0.7);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loader-spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FDFBF7;
+  border-bottom-color: #1e3a8a;
+  border-radius: 50%;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-active { pointer-events: none; opacity: 0.7; }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-secondary dark:text-gray-100 font-sans min-h-screen pb-24">
+
+<div id="loadingOverlay" class="loader-overlay">
+  <div class="flex flex-col items-center gap-4">
+    <div class="loader-spinner"></div>
+    <span class="text-white font-display italic tracking-widest">Cargando...</span>
+  </div>
+</div>
+
+<header class="pt-14 pb-4 px-6 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm sticky top-0 z-40">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="font-display text-3xl font-bold">Propiedades Exclusivas</h1>
+    <button onclick="irPagina('index.html')" class="w-10 h-10 rounded-full border border-gray-200 dark:border-white/20 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-white/10">
+      <span class="material-symbols-outlined">home</span>
+    </button>
+  </div>
+</header>
+
+<main class="px-6 space-y-8" id="propiedades">
+  <div class="flex flex-col items-center justify-center py-20">
+    <p class="text-gray-400 font-medium">Cargando catálogo...</p>
+  </div>
+</main>
+
+<script>
+const API_URL = 'PEGA_AQUI_URL_DE_APPS_SCRIPT';
+
+const CACHE_TTL = 5 * 60 * 1000;
+
+function getCachedData(key) {
+  const cached = localStorage.getItem(key);
+  if (!cached) return null;
+  
+  const data = JSON.parse(cached);
+  const now = Date.now();
+  
+  if (now - data.timestamp > CACHE_TTL) {
+    localStorage.removeItem(key);
+    return null;
+  }
+  
+  return data.value;
+}
+
+function setCachedData(key, value) {
+  const data = {
+    value: value,
+    timestamp: Date.now()
+  };
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function fetchWithCache(url, cacheKey) {
+  const cached = getCachedData(cacheKey);
+  if (cached) {
+    return Promise.resolve({ success: true, data: cached });
+  }
+  
+  return fetch(url)
+    .then(r => r.json())
+    .then(data => {
+      if (data.success) {
+        setCachedData(cacheKey, data.data);
+      }
+      return data;
+    });
+}
+
+fetchWithCache(`${API_URL}?path=propiedades/venta`, 'venta')
+  .then(data => cargarPropiedades(data.data))
+  .catch(error => {
+    console.error('Error:', error);
+    document.getElementById('propiedades').innerHTML = '<p class="text-center text-gray-500">Error al cargar las propiedades</p>';
+  });
+
+function cargarPropiedades(props) {
+  if (!props || !props.length) {
+    document.getElementById('propiedades').innerHTML = '<p class="text-center text-gray-500">No hay propiedades disponibles en este momento</p>';
+    return;
+  }
+  
+  document.getElementById('propiedades').innerHTML = props.map(p => `
+    <div class="group bg-white dark:bg-surface-dark rounded-[2rem] overflow-hidden shadow-xl border border-gray-100 dark:border-white/5 hover:scale-[1.01] transition-transform cursor-pointer" onclick="verDetalle(${p.id})">
+      <div class="relative h-72 w-full overflow-hidden">
+        <img alt="${p.titulo}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="${p.imagen1 || 'https://via.placeholder.com/800x600'}"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10"></div>
+        <div class="absolute bottom-5 left-5">
+          <div class="bg-primary/95 backdrop-blur-md text-white font-display font-bold text-xl px-4 py-2 rounded-xl shadow-lg border border-white/20">
+            ${p.precioFormateado}
+          </div>
+        </div>
+        ${p.destacada ? '<div class="absolute top-5 left-5"><span class="inline-block py-1 px-3 rounded-lg bg-primary/80 backdrop-blur-sm text-white text-[10px] font-bold tracking-widest uppercase border border-white/10">Destacada</span></div>' : ''}
+      </div>
+      <div class="p-6">
+        <h2 class="font-display text-2xl font-bold mb-1">${p.titulo}</h2>
+        <div class="flex items-center gap-1.5 mt-1.5 text-gray-500 dark:text-gray-400 mb-4">
+          <span class="material-symbols-outlined text-[18px] text-primary">location_on</span>
+          <span class="text-sm font-medium">${p.ubicacion}</span>
+        </div>
+        <div class="grid grid-cols-3 gap-4 pt-5 border-t border-gray-100 dark:border-white/10">
+          <div class="flex flex-col items-center gap-1">
+            <span class="material-symbols-outlined text-primary text-2xl">bed</span>
+            <span class="text-sm font-semibold">${p.habitaciones} <span class="text-xs font-normal text-gray-400">Hab.</span></span>
+          </div>
+          <div class="flex flex-col items-center gap-1 border-l border-gray-100 dark:border-white/10">
+            <span class="material-symbols-outlined text-primary text-2xl">bathtub</span>
+            <span class="text-sm font-semibold">${p.banos} <span class="text-xs font-normal text-gray-400">Baños</span></span>
+          </div>
+          <div class="flex flex-col items-center gap-1 border-l border-gray-100 dark:border-white/10">
+            <span class="material-symbols-outlined text-primary text-2xl">square_foot</span>
+            <span class="text-sm font-semibold">${p.metrosCuadrados} <span class="text-xs font-normal text-gray-400">m²</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function irPagina(pagina) {
+  document.getElementById('loadingOverlay').style.display = 'flex';
+  window.location.href = pagina;
+}
+
+function verDetalle(id) {
+  document.getElementById('loadingOverlay').style.display = 'flex';
+  window.location.href = `detalle.html?id=${id}`;
+}
+</script>
+
+</body>
+</html>
