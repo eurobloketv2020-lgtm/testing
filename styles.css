@@ -311,6 +311,7 @@ ul {
     align-items: center;
     justify-content: center;
     padding-top: var(--header-height);
+    padding-bottom: 3rem;
     overflow: hidden;
     background: var(--dark-bg);
 }
@@ -330,13 +331,13 @@ ul {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.85) 0%, rgba(45, 45, 45, 0.75) 100%);
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.88) 0%, rgba(45, 45, 45, 0.78) 100%);
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
     z-index: 1;
 }
 
@@ -344,26 +345,31 @@ ul {
     position: relative;
     z-index: 2;
     padding: 3rem 1rem;
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 3rem;
     align-items: center;
 }
 
 @media (min-width: 1024px) {
     .hero-container {
-        grid-template-columns: 1fr 1fr;
+        flex-direction: row;
         gap: 4rem;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 5rem 2rem;
     }
 }
 
 .hero-content {
+    flex: 1;
     max-width: 600px;
 }
 
 @media (min-width: 1024px) {
     .hero-content {
         text-align: left;
+        padding-right: 2rem;
     }
 }
 
@@ -377,8 +383,9 @@ ul {
     color: var(--dark-bg);
     border-radius: 2rem;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(138, 123, 35, 0.3);
 }
 
 .hero-badge i {
@@ -397,13 +404,19 @@ ul {
 
 @media (min-width: 640px) {
     .hero-title {
-        font-size: 3rem;
+        font-size: 2.75rem;
     }
 }
 
 @media (min-width: 1024px) {
     .hero-title {
-        font-size: 4rem;
+        font-size: 3.25rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .hero-title {
+        font-size: 3.75rem;
     }
 }
 
@@ -512,6 +525,7 @@ ul {
 
 /* Hero Cards (Floating) */
 .hero-cards {
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -525,7 +539,10 @@ ul {
 
 @media (min-width: 1024px) {
     .hero-cards {
+        flex: 0 0 450px;
+        width: 450px;
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 }
 
