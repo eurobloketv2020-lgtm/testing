@@ -144,6 +144,34 @@ function loadConfig() {
 // ==========================================
 function initEventListeners() {
     // Smooth scroll
+            // Botón Ver Todos Los Proyectos
+        const btnVerProyectos = document.getElementById('btn-ver-proyectos');
+        if (btnVerProyectos) {
+            btnVerProyectos.addEventListener('click', abrirModalProyectos);
+        }
+        
+        // Cerrar modal de proyectos
+        const proyectosModalClose = document.getElementById('proyectos-modal-close');
+        const proyectosModal = document.getElementById('proyectos-modal');
+        
+        if (proyectosModalClose) {
+            proyectosModalClose.addEventListener('click', cerrarModalProyectos);
+        }
+        
+        if (proyectosModal) {
+            proyectosModal.addEventListener('click', (e) => {
+                if (e.target === proyectosModal) {
+                    cerrarModalProyectos();
+                }
+            });
+        }
+        
+        // ESC para cerrar modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                cerrarModalProyectos();
+            }
+        });
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -451,3 +479,57 @@ function deleteProyecto(id) {
 
 // Hacer función global para que onclick funcione
 window.deleteProyecto = deleteProyecto;
+// ==========================================
+// MODAL DE TODOS LOS PROYECTOS
+// ==========================================
+function abrirModalProyectos() {
+    const modal = document.getElementById('proyectos-modal');
+    const modalGrid = document.getElementById('proyectos-modal-grid');
+    
+    // Limpiar grid
+    modalGrid.innerHTML = '';
+    
+    // Renderizar todos los proyectos
+    proyectos.forEach(proyecto => {
+        const card = document.createElement('div');
+        card.className = 'proyecto-card';
+        card.innerHTML = `
+            <img src="${proyecto.imagen}" alt="${proyecto.nombre}" loading="lazy">
+            <div class="proyecto-overlay">
+                <span class="proyecto-tag">${proyecto.tag}</span>
+                <h3>${proyecto.nombre}</h3>
+            </div>
+        `;
+        modalGrid.appendChild(card);
+    });
+    
+    // Mostrar modal
+    modal.classList.add('active');
+    
+    // Prevenir scroll del body
+    document.body.style.overflow = 'hidden';
+}
+
+function cerrarModalProyectos() {
+    const modal = document.getElementById('proyectos-modal');
+    modal.classList.remove('active');
+    
+    // Restaurar scroll del body
+    document.body.style.overflow = '';
+}
+
+// Función alternativa: expandir vista sin modal
+function mostrarTodosLosProyectos() {
+    const grid = document.getElementById('proyectos-grid');
+    const btnVerProyectos = document.getElementById('btn-ver-proyectos');
+    
+    // Si hay más de 6 proyectos, mostrarlos todos
+    if (proyectos.length > 6) {
+        renderProyectos(); // Ya renderiza todos
+        
+        // Cambiar texto del botón
+        if (btnVerProyectos) {
+            btnVerProyectos.textContent = 'Ver en Modal →';
+        }
+    }
+}
