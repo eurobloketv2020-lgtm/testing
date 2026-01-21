@@ -1,7 +1,12 @@
 /**
  * HARMONY GLASS - MAIN JAVASCRIPT
- * Carga dinámica de contenido desde config.js
+ * Versión funcional completa con menú móvil y administración
  */
+
+// ==========================================
+// ESTADO GLOBAL
+// ==========================================
+let proyectos = [];
 
 // ==========================================
 // CARGAR CONFIGURACIÓN AL INICIAR
@@ -9,6 +14,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadConfig();
     initEventListeners();
+    loadProyectos();
 });
 
 // ==========================================
@@ -91,31 +97,6 @@ function loadConfig() {
     // Proyectos
     document.getElementById('proyectos-title').innerHTML = CONFIG.textos.proyectosTitulo;
     document.getElementById('proyectos-subtitle').textContent = CONFIG.textos.proyectosSubtitulo;
-    
-    document.getElementById('proyecto-img-1').src = CONFIG.assets.proyecto1;
-    document.getElementById('proyecto-tag-1').textContent = CONFIG.textos.proyectoTag1;
-    document.getElementById('proyecto-nombre-1').textContent = CONFIG.textos.proyectoNombre1;
-    
-    document.getElementById('proyecto-img-2').src = CONFIG.assets.proyecto2;
-    document.getElementById('proyecto-tag-2').textContent = CONFIG.textos.proyectoTag2;
-    document.getElementById('proyecto-nombre-2').textContent = CONFIG.textos.proyectoNombre2;
-    
-    document.getElementById('proyecto-img-3').src = CONFIG.assets.proyecto3;
-    document.getElementById('proyecto-tag-3').textContent = CONFIG.textos.proyectoTag3;
-    document.getElementById('proyecto-nombre-3').textContent = CONFIG.textos.proyectoNombre3;
-    
-    document.getElementById('proyecto-img-4').src = CONFIG.assets.proyecto4;
-    document.getElementById('proyecto-tag-4').textContent = CONFIG.textos.proyectoTag4;
-    document.getElementById('proyecto-nombre-4').textContent = CONFIG.textos.proyectoNombre4;
-    
-    document.getElementById('proyecto-img-5').src = CONFIG.assets.proyecto5;
-    document.getElementById('proyecto-tag-5').textContent = CONFIG.textos.proyectoTag5;
-    document.getElementById('proyecto-nombre-5').textContent = CONFIG.textos.proyectoNombre5;
-    
-    document.getElementById('proyecto-img-6').src = CONFIG.assets.proyecto6;
-    document.getElementById('proyecto-tag-6').textContent = CONFIG.textos.proyectoTag6;
-    document.getElementById('proyecto-nombre-6').textContent = CONFIG.textos.proyectoNombre6;
-    
     document.getElementById('btn-ver-proyectos').textContent = CONFIG.textos.btnVerProyectos;
 
     // Estadísticas
@@ -169,8 +150,54 @@ function initEventListeners() {
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Cerrar menú móvil si está abierto
+                const nav = document.getElementById('main-nav');
+                const menuToggle = document.getElementById('mobile-menu-toggle');
+                nav.classList.remove('active');
+                menuToggle.classList.remove('active');
             }
         });
+    });
+
+    // Menú móvil toggle
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const nav = document.getElementById('main-nav');
+    
+    menuToggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+    });
+
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+            nav.classList.remove('active');
+            menuToggle.classList.remove('active');
+        }
+    });
+
+    // Scroll indicator
+    const scrollIndicator = document.getElementById('scroll-to-cotizador');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', () => {
+            document.getElementById('cotizador').scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    // Botones de cotizar
+    const cotizarButtons = [
+        document.getElementById('btn-hero-cotizar'),
+        document.getElementById('btn-header-cta'),
+        document.getElementById('btn-cotizar-ahora')
+    ];
+    
+    cotizarButtons.forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', () => {
+                document.getElementById('cotizador').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
     });
 
     // WhatsApp buttons
@@ -188,7 +215,7 @@ function initEventListeners() {
         }
     });
 
-    // Call button
+    // Call buttons
     const callButtons = [
         document.getElementById('btn-hero-contacto'),
         document.getElementById('btn-llamar-cta')
@@ -204,6 +231,9 @@ function initEventListeners() {
 
     // Cotizador
     document.getElementById('btn-calcular').addEventListener('click', calcularVentana);
+
+    // Admin
+    initAdminPanel();
 }
 
 // ==========================================
@@ -228,7 +258,7 @@ function calcularVentana() {
     // Scroll to resultado
     resultado.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-    // Opcional: Enviar a WhatsApp con las medidas
+    // Opcional: Enviar a WhatsApp
     setTimeout(() => {
         if (confirm('¿Deseas enviar estas medidas por WhatsApp para una cotización exacta?')) {
             const phone = CONFIG.contacto.whatsapp;
@@ -237,3 +267,187 @@ function calcularVentana() {
         }
     }, 1000);
 }
+
+// ==========================================
+// CARGAR PROYECTOS
+// ==========================================
+function loadProyectos() {
+    // Cargar proyectos desde localStorage o usar defaults
+    const savedProyectos = localStorage.getItem('harmony_proyectos');
+    
+    if (savedProyectos) {
+        proyectos = JSON.parse(savedProyectos);
+    } else {
+        // Proyectos por defecto
+        proyectos = [
+            {
+                id: 1,
+                nombre: CONFIG.textos.proyectoNombre1,
+                tag: CONFIG.textos.proyectoTag1,
+                imagen: CONFIG.assets.proyecto1
+            },
+            {
+                id: 2,
+                nombre: CONFIG.textos.proyectoNombre2,
+                tag: CONFIG.textos.proyectoTag2,
+                imagen: CONFIG.assets.proyecto2
+            },
+            {
+                id: 3,
+                nombre: CONFIG.textos.proyectoNombre3,
+                tag: CONFIG.textos.proyectoTag3,
+                imagen: CONFIG.assets.proyecto3
+            },
+            {
+                id: 4,
+                nombre: CONFIG.textos.proyectoNombre4,
+                tag: CONFIG.textos.proyectoTag4,
+                imagen: CONFIG.assets.proyecto4
+            },
+            {
+                id: 5,
+                nombre: CONFIG.textos.proyectoNombre5,
+                tag: CONFIG.textos.proyectoTag5,
+                imagen: CONFIG.assets.proyecto5
+            },
+            {
+                id: 6,
+                nombre: CONFIG.textos.proyectoNombre6,
+                tag: CONFIG.textos.proyectoTag6,
+                imagen: CONFIG.assets.proyecto6
+            }
+        ];
+        saveProyectos();
+    }
+    
+    renderProyectos();
+}
+
+function renderProyectos() {
+    const grid = document.getElementById('proyectos-grid');
+    grid.innerHTML = '';
+    
+    proyectos.forEach(proyecto => {
+        const card = document.createElement('div');
+        card.className = 'proyecto-card';
+        card.innerHTML = `
+            <img src="${proyecto.imagen}" alt="${proyecto.nombre}">
+            <div class="proyecto-overlay">
+                <span class="proyecto-tag">${proyecto.tag}</span>
+                <h3>${proyecto.nombre}</h3>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function saveProyectos() {
+    localStorage.setItem('harmony_proyectos', JSON.stringify(proyectos));
+}
+
+// ==========================================
+// PANEL DE ADMINISTRACIÓN
+// ==========================================
+function initAdminPanel() {
+    const adminBtn = document.getElementById('admin-access-btn');
+    const modal = document.getElementById('admin-modal');
+    const closeBtn = document.getElementById('admin-modal-close');
+    const loginBtn = document.getElementById('admin-login-btn');
+    const passwordInput = document.getElementById('admin-password');
+    const uploadForm = document.getElementById('admin-upload-form');
+
+    // Abrir modal
+    adminBtn.addEventListener('click', () => {
+        modal.classList.add('active');
+    });
+
+    // Cerrar modal
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+
+    // Cerrar al hacer click fuera
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+
+    // Login
+    loginBtn.addEventListener('click', () => {
+        const password = passwordInput.value;
+        
+        // Contraseña: admin123 (cambiar en producción)
+        if (password === CONFIG.admin.password || password === 'admin123') {
+            document.getElementById('admin-login').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'block';
+            document.getElementById('admin-error').style.display = 'none';
+            loadAdminProyectos();
+        } else {
+            document.getElementById('admin-error').style.display = 'block';
+        }
+    });
+
+    // Enter en password
+    passwordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            loginBtn.click();
+        }
+    });
+
+    // Upload form
+    uploadForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const nombre = document.getElementById('project-name').value;
+        const tag = document.getElementById('project-tag').value;
+        const imagen = document.getElementById('project-image').value;
+        
+        const newProject = {
+            id: Date.now(),
+            nombre: nombre,
+            tag: tag,
+            imagen: imagen
+        };
+        
+        proyectos.push(newProject);
+        saveProyectos();
+        renderProyectos();
+        loadAdminProyectos();
+        
+        // Limpiar form
+        uploadForm.reset();
+        
+        alert('Proyecto agregado correctamente');
+    });
+}
+
+function loadAdminProyectos() {
+    const list = document.getElementById('admin-projects-list');
+    list.innerHTML = '';
+    
+    proyectos.forEach(proyecto => {
+        const item = document.createElement('div');
+        item.className = 'admin-project-item';
+        item.innerHTML = `
+            <div>
+                <strong>${proyecto.nombre}</strong><br>
+                <small>${proyecto.tag}</small>
+            </div>
+            <button onclick="deleteProyecto(${proyecto.id})">Eliminar</button>
+        `;
+        list.appendChild(item);
+    });
+}
+
+function deleteProyecto(id) {
+    if (confirm('¿Seguro que deseas eliminar este proyecto?')) {
+        proyectos = proyectos.filter(p => p.id !== id);
+        saveProyectos();
+        renderProyectos();
+        loadAdminProyectos();
+    }
+}
+
+// Hacer función global para que onclick funcione
+window.deleteProyecto = deleteProyecto;
