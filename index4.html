@@ -19,14 +19,18 @@
                 <div class="logo">
                     <img id="logo-img" src="" alt="">
                 </div>
-                <nav class="nav">
+                <nav class="nav" id="main-nav">
                     <a href="#cotizador" id="nav-cotizador">Cargando...</a>
                     <a href="#porque" id="nav-porque">Cargando...</a>
                     <a href="#proyectos" id="nav-proyectos">Cargando...</a>
                     <a href="#contacto" id="nav-contacto">Cargando...</a>
                     <button class="btn-header" id="btn-header-cta">Cargando...</button>
                 </nav>
-                <button class="mobile-menu-btn">☰</button>
+                <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
             </div>
         </div>
     </header>
@@ -58,7 +62,7 @@
                 <p class="hero-note" id="hero-note">Cargando...</p>
             </div>
         </div>
-        <div class="scroll-indicator">
+        <div class="scroll-indicator" id="scroll-to-cotizador">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                 <path d="M7 10l5 5 5-5z"/>
             </svg>
@@ -261,49 +265,8 @@
         <div class="container">
             <h2 class="section-title-center" id="proyectos-title">Cargando...</h2>
             <p class="section-subtitle-center" id="proyectos-subtitle">Cargando...</p>
-            <div class="proyectos-grid">
-                <div class="proyecto-card">
-                    <img id="proyecto-img-1" src="" alt="">
-                    <div class="proyecto-overlay">
-                        <span class="proyecto-tag" id="proyecto-tag-1">Cargando...</span>
-                        <h3 id="proyecto-nombre-1">Cargando...</h3>
-                    </div>
-                </div>
-                <div class="proyecto-card">
-                    <img id="proyecto-img-2" src="" alt="">
-                    <div class="proyecto-overlay">
-                        <span class="proyecto-tag" id="proyecto-tag-2">Cargando...</span>
-                        <h3 id="proyecto-nombre-2">Cargando...</h3>
-                    </div>
-                </div>
-                <div class="proyecto-card">
-                    <img id="proyecto-img-3" src="" alt="">
-                    <div class="proyecto-overlay">
-                        <span class="proyecto-tag" id="proyecto-tag-3">Cargando...</span>
-                        <h3 id="proyecto-nombre-3">Cargando...</h3>
-                    </div>
-                </div>
-                <div class="proyecto-card">
-                    <img id="proyecto-img-4" src="" alt="">
-                    <div class="proyecto-overlay">
-                        <span class="proyecto-tag" id="proyecto-tag-4">Cargando...</span>
-                        <h3 id="proyecto-nombre-4">Cargando...</h3>
-                    </div>
-                </div>
-                <div class="proyecto-card">
-                    <img id="proyecto-img-5" src="" alt="">
-                    <div class="proyecto-overlay">
-                        <span class="proyecto-tag" id="proyecto-tag-5">Cargando...</span>
-                        <h3 id="proyecto-nombre-5">Cargando...</h3>
-                    </div>
-                </div>
-                <div class="proyecto-card">
-                    <img id="proyecto-img-6" src="" alt="">
-                    <div class="proyecto-overlay">
-                        <span class="proyecto-tag" id="proyecto-tag-6">Cargando...</span>
-                        <h3 id="proyecto-nombre-6">Cargando...</h3>
-                    </div>
-                </div>
+            <div class="proyectos-grid" id="proyectos-grid">
+                <!-- Los proyectos se cargarán dinámicamente desde config.js -->
             </div>
             <div class="section-cta">
                 <button class="btn-red-large" id="btn-ver-proyectos">Cargando...</button>
@@ -379,28 +342,28 @@
                 <div class="footer-col">
                     <h4 id="footer-servicios-title">Cargando...</h4>
                     <ul>
-                        <li><a href="#" id="footer-servicio-1">Cargando...</a></li>
-                        <li><a href="#" id="footer-servicio-2">Cargando...</a></li>
-                        <li><a href="#" id="footer-servicio-3">Cargando...</a></li>
+                        <li><a href="#proyectos" id="footer-servicio-1">Cargando...</a></li>
+                        <li><a href="#stats" id="footer-servicio-2">Cargando...</a></li>
+                        <li><a href="#contacto" id="footer-servicio-3">Cargando...</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4 id="footer-contacto-title">Cargando...</h4>
                     <ul class="footer-contact">
                         <li>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#D13839">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#C13F3E">
                                 <path d="M3 2h10v10H3V2z"/>
                             </svg>
                             <span id="footer-telefono">Cargando...</span>
                         </li>
                         <li>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#D13839">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#C13F3E">
                                 <rect x="2" y="4" width="12" height="8" rx="1"/>
                             </svg>
                             <span id="footer-email">Cargando...</span>
                         </li>
                         <li>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#D13839">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#C13F3E">
                                 <path d="M8 0a6 6 0 00-6 6c0 4.5 6 10 6 10s6-5.5 6-10a6 6 0 00-6-6z"/>
                             </svg>
                             <span id="footer-ubicacion">Cargando...</span>
@@ -417,6 +380,39 @@
             </div>
         </div>
     </footer>
+
+    <!-- MODAL DE ADMINISTRACIÓN -->
+    <div class="admin-modal" id="admin-modal">
+        <div class="admin-modal-content">
+            <button class="admin-modal-close" id="admin-modal-close">&times;</button>
+            <h2>Gestión de Proyectos</h2>
+            
+            <!-- LOGIN -->
+            <div id="admin-login" class="admin-panel">
+                <h3>Acceso Administrador</h3>
+                <input type="password" id="admin-password" placeholder="Contraseña">
+                <button class="btn-red" id="admin-login-btn">Ingresar</button>
+                <p id="admin-error" class="error-message" style="display: none;">Contraseña incorrecta</p>
+            </div>
+
+            <!-- PANEL ADMIN -->
+            <div id="admin-panel" class="admin-panel" style="display: none;">
+                <h3>Subir Nuevo Proyecto</h3>
+                <form id="admin-upload-form">
+                    <input type="text" id="project-name" placeholder="Nombre del proyecto" required>
+                    <input type="text" id="project-tag" placeholder="Tag (ej: PROYECTO COMERCIAL)" required>
+                    <input type="url" id="project-image" placeholder="URL de la imagen" required>
+                    <button type="submit" class="btn-red">Agregar Proyecto</button>
+                </form>
+                
+                <h3>Proyectos Actuales</h3>
+                <div id="admin-projects-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de acceso admin (oculto) -->
+    <button class="admin-access-btn" id="admin-access-btn" title="Administración">⚙️</button>
 
     <script src="main4.js"></script>
 </body>
