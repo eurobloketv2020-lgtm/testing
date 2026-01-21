@@ -42,7 +42,7 @@ const CONFIG = {
   // ASSETS VISUALES
   // ==========================================
   assets: {
-    logo: "images/logo.svg",
+    logo: "logo4.png",
     logoAlt: "Harmony Glass Logo",
     heroBackground: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053",
     
