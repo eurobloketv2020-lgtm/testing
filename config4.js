@@ -54,6 +54,12 @@ const CONFIG = {
     proyecto5: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=2087",
     proyecto6: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070"
   },
+  // ==========================================
+  // ADMIN
+  // ==========================================
+  admin: {
+    password: "glass1234!" // Cambiar en producción
+  },
 
   // ==========================================
   // TEXTOS DEL SITIO
@@ -226,9 +232,4 @@ const CONFIG = {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = CONFIG;
 }
-// ==========================================
-// ADMIN
-// ==========================================
-admin: {
-  password: "glass1234!" // Cambiar en producción
-}
+
