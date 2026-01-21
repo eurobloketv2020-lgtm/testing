@@ -20,9 +20,9 @@ const CONFIG = {
   // CONTACTO
   // ==========================================
   contacto: {
-    email: "info@harmonyglass.com",
-    whatsapp: "8095551234", // Solo números, sin + ni espacios
-    telefono: "+1 (809) 555-1234",
+    email: "harmonyglass0@gmail.com",
+    whatsapp: "809413046", // Solo números, sin + ni espacios
+    telefono: "+1 (809) 413-0846",
     telefonoDisplay: "Llamar",
     ubicacion: "República Dominicana",
     horario: "Lun-Vie 09:00 - 18:00",
@@ -213,8 +213,8 @@ const CONFIG = {
   // BACKEND
   // ==========================================
   backend: {
-    googleAppsScriptURL: "https://script.google.com/macros/s/TU_DEPLOYMENT_ID/exec",
-    spreadsheetId: "TU_SPREADSHEET_ID_AQUI"
+    googleAppsScriptURL: "https://script.google.com/macros/s/AKfycbzVwTVt7awaLlpTxl72CV1r1Gk0Cgd4OuslfOuvbzopyDZuIU2I7jm62RePqzzVD40Mog/exec",
+    spreadsheetId: "1f8Yk4fs054MfZi65W-AkL2CKFtbm_VvpCKAUNJbZrkQ"
   }
 };
 
