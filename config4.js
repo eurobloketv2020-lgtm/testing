@@ -226,3 +226,9 @@ const CONFIG = {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = CONFIG;
 }
+// ==========================================
+// ADMIN
+// ==========================================
+admin: {
+  password: "glass1234!" // Cambiar en producción
+}
