@@ -11,7 +11,7 @@ const CONFIG = {
   // ==========================================
   empresa: {
     nombre: "Harmony Glass",
-    nombreCorto: "GLASS",
+    nombreCorto: "HGLASS",
     slogan: "Ventanas de aluminio hechas a la medida de tu proyecto",
     descripcion: "Fabricación e instalación profesional de ventanas de aluminio en República Dominicana."
   },
