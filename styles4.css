@@ -1086,3 +1086,91 @@ body {
         gap: 12px;
     }
 }
+/* ==========================================
+   MODAL DE TODOS LOS PROYECTOS
+========================================== */
+.proyectos-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 10000;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.proyectos-modal.active {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.proyectos-modal-content {
+    background: var(--pink-light);
+    border-radius: 12px;
+    max-width: 1400px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 40px;
+}
+
+.proyectos-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--red);
+}
+
+.proyectos-modal-header h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--black);
+    text-transform: uppercase;
+}
+
+.proyectos-modal-close {
+    background: none;
+    border: none;
+    font-size: 48px;
+    color: var(--gray);
+    cursor: pointer;
+    transition: color 0.3s;
+    line-height: 1;
+    padding: 0;
+    width: 48px;
+    height: 48px;
+}
+
+.proyectos-modal-close:hover {
+    color: var(--red);
+}
+
+.proyectos-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+/* Responsive del modal */
+@media (max-width: 768px) {
+    .proyectos-modal-content {
+        padding: 20px;
+        margin: 20px auto;
+    }
+    
+    .proyectos-modal-header h2 {
+        font-size: 24px;
+    }
+    
+    .proyectos-modal-close {
+        font-size: 36px;
+        width: 36px;
+        height: 36px;
+    }
+    
+    .proyectos-modal-grid {
+        grid-template-columns: 1fr;
+    }
+}
