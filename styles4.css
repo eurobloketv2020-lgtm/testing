@@ -8,8 +8,8 @@
 }
 
 :root {
-    --red: #D13839;
-    --red-dark: #a82c2d;
+    --red: #C13F3E;
+    --red-dark: #9a3231;
     --black: #1a1a1a;
     --dark: #2a2a2a;
     --pink-light: #f5e6e6;
@@ -59,6 +59,7 @@ body {
     display: flex;
     align-items: center;
     gap: 32px;
+    transition: all 0.3s;
 }
 
 .nav a {
@@ -95,9 +96,30 @@ body {
     display: none;
     background: none;
     border: none;
-    color: var(--white);
-    font-size: 24px;
     cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+}
+
+.hamburger-line {
+    width: 25px;
+    height: 3px;
+    background: var(--white);
+    transition: all 0.3s;
+}
+
+/* Mobile menu active state */
+.mobile-menu-btn.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-btn.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* ==========================================
@@ -220,6 +242,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     animation: bounce 2s infinite;
+    cursor: pointer;
 }
 
 @keyframes bounce {
@@ -242,10 +265,6 @@ body {
     font-weight: 800;
     margin-bottom: 16px;
     text-transform: uppercase;
-}
-
-.section-title-red::first-word {
-    color: var(--red);
 }
 
 .section-subtitle {
@@ -289,9 +308,14 @@ body {
     font-size: 16px;
 }
 
+.form-group input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
 .form-group input:focus {
     outline: none;
     border-color: var(--red);
+    background: rgba(255,255,255,0.15);
 }
 
 .btn-red-large {
@@ -310,6 +334,7 @@ body {
 
 .btn-red-large:hover {
     background: var(--red-dark);
+    transform: translateY(-2px);
 }
 
 .cotizador-note {
@@ -322,9 +347,10 @@ body {
 .resultado-cotizacion {
     margin-top: 24px;
     padding: 20px;
-    background: rgba(209, 56, 57, 0.2);
+    background: rgba(193, 63, 62, 0.2);
     border-radius: 4px;
     text-align: center;
+    border: 1px solid var(--red);
 }
 
 .cotizador-benefits {
@@ -351,6 +377,7 @@ body {
     justify-content: center;
 }
 
+/* Continúa en parte 2... */
 /* ==========================================
    POR QUÉ ELEGIRNOS
 ========================================== */
@@ -835,6 +862,126 @@ body {
 }
 
 /* ==========================================
+   MODAL DE ADMINISTRACIÓN
+========================================== */
+.admin-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.admin-modal.active {
+    display: flex;
+}
+
+.admin-modal-content {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.admin-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: var(--gray);
+    transition: color 0.3s;
+}
+
+.admin-modal-close:hover {
+    color: var(--red);
+}
+
+.admin-panel h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--black);
+}
+
+.admin-panel input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+.admin-panel input:focus {
+    outline: none;
+    border-color: var(--red);
+}
+
+.error-message {
+    color: var(--red);
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+.admin-projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.admin-project-item {
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-project-item button {
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.admin-access-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    transition: all 0.3s;
+    z-index: 9999;
+}
+
+.admin-access-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+}
+
+/* ==========================================
    RESPONSIVE
 ========================================== */
 @media (max-width: 1024px) {
@@ -851,11 +998,37 @@ body {
 
 @media (max-width: 768px) {
     .nav {
-        display: none;
+        position: fixed;
+        top: 68px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 68px);
+        background: var(--black);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 40px 20px;
+        gap: 24px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    
+    .nav.active {
+        left: 0;
+    }
+    
+    .nav a {
+        font-size: 18px;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+    }
+    
+    .btn-header {
+        width: 100%;
+        padding: 14px;
     }
     
     .mobile-menu-btn {
-        display: block;
+        display: flex;
     }
     
     .hero-title {
@@ -876,6 +1049,11 @@ body {
     
     .cotizador-form {
         grid-template-columns: 1fr;
+    }
+    
+    .cotizador-benefits {
+        flex-direction: column;
+        gap: 24px;
     }
     
     .porque-grid,
@@ -900,5 +1078,11 @@ body {
     .footer-bottom {
         flex-direction: column;
         gap: 16px;
+        text-align: center;
+    }
+    
+    .footer-legal {
+        flex-direction: column;
+        gap: 12px;
     }
 }
