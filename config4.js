@@ -21,7 +21,7 @@ const CONFIG = {
   // ==========================================
   contacto: {
     email: "harmonyglass0@gmail.com",
-    whatsapp: "809413046", // Solo números, sin + ni espacios
+    whatsapp: "1809413046", // Solo números, sin + ni espacios
     telefono: "+1 (809) 413-0846",
     telefonoDisplay: "Llamar",
     ubicacion: "República Dominicana",
