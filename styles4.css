@@ -137,7 +137,7 @@ body {
     
     /* Ajustes adicionales */
     background-attachment: fixed; /* Efecto parallax */
-    background-position: center center;
+    background-position: right center;
 }
 
 .hero-content {
