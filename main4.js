@@ -42,6 +42,11 @@ function loadConfig() {
     document.getElementById('btn-header-cta').textContent = CONFIG.textos.navCTA;
 
     // Hero
+    // Logo marca de agua en hero
+    const heroLogoWatermark = document.getElementById('hero-logo-watermark');
+    if (heroLogoWatermark) {
+        heroLogoWatermark.src = CONFIG.assets.logo;
+    }
     document.getElementById('hero-title').innerHTML = CONFIG.textos.heroTitulo;
     document.getElementById('hero-subtitle').textContent = CONFIG.textos.heroSubtitulo;
     document.getElementById('hero-feature-1').textContent = CONFIG.textos.heroFeature1;
