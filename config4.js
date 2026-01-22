@@ -44,7 +44,7 @@ const CONFIG = {
   assets: {
     logo: "logo4.png",
     logoAlt: "Harmony Glass Logo",
-    heroBackground: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053",
+    heroBackground: "https://i.ibb.co/TqbkNffJ/Gemini-Generated-Image-b22bx4b22bx4b22b.png",
     
     // Proyectos
     proyecto1: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070",
