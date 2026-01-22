@@ -1195,3 +1195,83 @@ body {
         grid-template-columns: 1fr;
     }
 }
+/* ==========================================
+   HERO - LOGO MARCA DE AGUA PROMINENTE
+========================================== */
+.hero-logo-watermark {
+    position: absolute;
+    top: 50%;
+    left: -5%;
+    transform: translateY(-50%);
+    z-index: 1;
+    opacity: 0.12;
+    pointer-events: none;
+    animation: logoSlideIn 1.5s ease-out;
+}
+
+@keyframes logoSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(-100px);
+    }
+    to {
+        opacity: 0.12;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+.hero-logo-watermark img {
+    width: 700px;
+    height: auto;
+    filter: brightness(0) invert(1);
+}
+
+/* Asegurar que el contenido esté por encima */
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+}
+
+/* Responsive */
+@media (max-width: 1440px) {
+    .hero-logo-watermark img {
+        width: 600px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .hero-logo-watermark {
+        left: -10%;
+    }
+    
+    .hero-logo-watermark img {
+        width: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-logo-watermark {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.08;
+    }
+    
+    .hero-logo-watermark img {
+        width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-logo-watermark {
+        opacity: 0.06;
+    }
+    
+    .hero-logo-watermark img {
+        width: 250px;
+    }
+}
