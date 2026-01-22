@@ -431,14 +431,15 @@ body {
 }
 
 .porque-icon {
-    width: 70px;
-    height: 70px;
-    border-radius: 8px;
+    width: 80px;
+    height: 80px;
+    border-radius: 12px; /* Bordes ligeramente redondeados, no círculo completo */
     background: var(--red);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
+    position: relative;
 }
 
 .porque-card h3 {
@@ -454,7 +455,10 @@ body {
     line-height: 1.7;
     color: var(--gray);
 }
-
+.porque-icon svg {
+    width: 40px;
+    height: 40px;
+}
 .section-cta {
     text-align: center;
 }
