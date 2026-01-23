@@ -1204,6 +1204,7 @@ body {
 ========================================== */
 /* Logo grande decorativo en la esquina inferior izquierda */
 .hero-logo-watermark {
+   
     position: absolute;
     bottom: 40px;
     left: 40px;
@@ -1227,16 +1228,12 @@ body {
 .hero-logo-watermark img {
     width: 400px;
     height: auto;
-    /* Filtro para color rojo transparente */
+    /* Tinte rojo #c8100f */
     filter: 
-        brightness(0)           /* Convertir a negro */
-        saturate(100%)          /* Saturación */
-        invert(17%)             /* Ajustar tono */
-        sepia(100%)             /* Aplicar sepia */
-        saturate(7000%)         /* Super saturar */
-        hue-rotate(350deg)      /* Rotar a rojo */
-        brightness(0.8)         /* Ajustar brillo */
-        opacity(0.25);          /* Transparencia */
+        brightness(0.5)
+        sepia(100%)
+        saturate(7000%)
+        hue-rotate(350deg);
 }
 
 /* Asegurar que el contenido esté por encima */
