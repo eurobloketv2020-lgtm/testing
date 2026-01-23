@@ -9,6 +9,16 @@ const CONFIG = {
   // ==========================================
   // INFORMACIÓN DE LA EMPRESA
   // ==========================================
+  colores: {
+    principal: "#c8100f",      // Rojo principal
+    principalOscuro: "#a00d0c", // Rojo oscuro (hover)
+    negro: "#1a1a1a",
+    oscuro: "#2a2a2a",
+    rosaClaro: "#f5e6e6",
+    gris: "#666666",
+    grisClaro: "#999999",
+    blanco: "#ffffff"
+  },
   empresa: {
     nombre: "Harmony Glass",
     nombreCorto: "HGLASS",
