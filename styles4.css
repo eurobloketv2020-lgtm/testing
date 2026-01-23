@@ -8,8 +8,8 @@
 }
 
 :root {
-    --red: #C13F3E;
-    --red-dark: #9a3231;
+    --red: #c8100f;           /* ← NUEVO COLOR */
+    --red-dark: #a00d0c;      /* ← COLOR HOVER */
     --black: #1a1a1a;
     --dark: #2a2a2a;
     --pink-light: #f5e6e6;
